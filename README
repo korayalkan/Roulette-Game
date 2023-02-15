@@ -1,0 +1,19 @@
+Main module is userAction.py
+Game module is roulette.py
+Register module is getdetails.py
+Log in module is checkdetails.py
+All the users are in database.txt file
+Current user's information (while playing) is going to be in currentUser.txt
+
+-----------------------------------------------------------------------------
+
+Program is simple,
+Just sign in and program is going to redirect you to log in.
+Log in and start playing, when you win and want to exit program, your data will be updated in database.txt, but when you want to keep playing and choose "Play Again" option after playing, your data will not change. This is a bug :)
+Your data is going be stored in dictionaries to keep it safe and easily updatable
+
+------------------------------------------------------------------------------
+
+Only library I used in this program is "random" library to generate a random number for Roulette game.
+There might be lots of bugs, and also I can add lots of features. But for now, I want to keep it simple and updatable.
+Thanks for reading. Have a great day and keep coding :)
