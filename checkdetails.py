@@ -1,14 +1,28 @@
+import checkdetails
 import roulette
 
-# Get user's data for logging in
-def userlogin():
+# Get user's data for registering
+def userregister():
 
-    # Check the user data
-    checkDict = {
-        "Username": [],
-        "Password": [],
-        "Money": []
+    # In this list, I store the current user's username and password for registering
+    userDict = {
+                "Username": [],
+                "Password": [],
+                "Money": []
     }
+
+    # To check user's username if exists
+    controlDict = {
+                    "Usernames": [],
+                    "Passwords": [],
+                    "Moneys": []
+    }
+
+    # User's starting money
+    bonus = "100"
+
+    # Get username
+    usernameReg = input("Enter a username: ").lower()
 
     # Open text file to check if user's username exists
     with open("database.txt", "r") as db:
@@ -19,43 +33,64 @@ def userlogin():
             u, p, m = data.split(',')
             m = m.strip('\n')
 
-            # Add username, password and money in the lists in checkDict
-            checkDict["Username"].append(u)
-            checkDict["Password"].append(p)
-            checkDict["Money"].append(m)
+            # Add username, password and money in the lists in controlDict
+            controlDict["Usernames"].append(u)
+            controlDict["Passwords"].append(p)
+            controlDict["Moneys"].append(m)
 
-    # Get user's existing username
-    usernameLog = input("Enter your username: ").lower()
+    # If username already exists
+    while usernameReg in controlDict["Usernames"]:
+        print("This username exists. Choose another one!\n")
+        userregister()
 
-    # If username doesn't exist in database, return to logging in
-    while usernameLog not in checkDict["Username"]:
-        print("This username doesn't exist in our database!\n")
-        return userlogin()
+    # Username length must be 5-16 chars long
+    while len(usernameReg) < 5:
+        print("Username length must be between 5-16 characters long!\n")
+        userregister()
 
-    # Index of the Username in checkDict
-    index = checkDict["Username"].index(usernameLog)
+    # Username length must be 5-16 chars long
+    while len(usernameReg) > 16:
+        print("Username length must be between 5-16 characters long!\n")
+        userregister()
 
-    # If user doesn't have enough money to play roulette
-    for x in checkDict["Money"]:
-        converter = int(x)
-        while converter < 1:
-            print("\n   You can't play on this account anymore,\n"
-                  "Because you lost all your money, plase sign in again...")
-            exit()
+    # Get the password
+    passwordReg = input("Enter your password: ").lower()
 
-    # Get user's existing password
-    passwordLog = input("Enter your password: ").lower()
+    # Password length 6-12 char long
+    while len(passwordReg) < 6:
+        print("Password length must be between 6-12 characters long!\n")
+        userregister()
 
-    # Index of the Password in checkDict according to Username's index
-    # Check if the password matches
-    while passwordLog != checkDict["Password"][index]:
-        print("Password incorrect!\n")
-        return userlogin()
+    # Password length 6-12 char long
+    while len(passwordReg) > 12:
+        print("Password length must be between 6-12 characters long!\n")
+        userregister()
 
-    # Appending current user's data to the dict in roulette module
-    roulette.currentData["Username"].append(usernameLog)
-    roulette.currentData["Password"].append(passwordLog)
-    roulette.currentData["Money"].append(checkDict["Money"][index])
+    # Confirm password
+    confirmPassword = input("Enter your password again: ").lower()
 
-    # Send user to roulette game
-    roulette.spinWheel()
+    # If passwords don't match
+    while passwordReg != confirmPassword:
+        print("Passwords don't match!\n")
+        return userregister()
+
+    # Add username, password and money in dict
+    userDict["Username"].append(usernameReg)
+    userDict["Password"].append(passwordReg)
+    userDict["Money"].append(bonus)
+
+    # Open the text file to write user data
+    with open("database.txt", "a") as db:
+        write = db.writelines(userDict["Username"])
+        write = db.writelines(',')
+        write = db.writelines(userDict["Password"])
+        write = db.writelines(',')
+        write = db.writelines(userDict["Money"])
+        write = db.writelines('\n')
+
+    # Send user to roulette game to log in
+    print("\n")
+    print("=-" * 25)
+    print("          Please log in to start playing..")
+    print("-=" * 25)
+    checkdetails.userlogin()
