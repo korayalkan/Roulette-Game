@@ -1,3 +1,1 @@
-lucifer,123,300
-bovix,123,90
-koray,123,130
+korayalkan,123,100
