@@ -83,6 +83,18 @@ def spinWheel():
     while int(userNumber) != winningNum:
         print("\nYou couldn't guess Winning Number!\n")
 
+        # Copied and pasted from line 23, same thing
+        money = currentData["Money"]
+        for item in money:
+            pass
+        converter = int(item)
+
+        # If user lost his/her all money
+        while converter < 1:
+            print("You lost all your money,\n"
+                  "You can't play on this account anymore.\n"
+                  "Please restart the program and sign in again...")
+
         # Ask user if he/she wants to play again
         playAgain = input("Play Again       |  1\n"
                           "Exit             |  2: ")
