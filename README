@@ -1,3 +1,8 @@
+.
+.
+.
+.
+.
 Main module is userAction.py
 Game module is roulette.py
 Register module is getdetails.py
@@ -23,3 +28,8 @@ Your data is going be stored in dictionaries to keep it safe and easily updatabl
 Only library I used in this program is "random" library to generate a random number for Roulette game.
 There might be lots of bugs, and also I can add lots of features. But for now, I want to keep it simple and updatable.
 Thanks for reading. Have a great day and keep coding :)
+.
+.
+.
+.
+.
