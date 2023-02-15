@@ -36,7 +36,7 @@ def spinWheel():
     winningNum = random.randint(0, 36)
     #print(winningNum)           # For testing, printing the number
     for x in currentData["Money"]:
-        print("You have: $"+x)
+        print("You have: $",x)
 
     # Ask for user's bet with exception handling
     try:
@@ -90,10 +90,41 @@ def spinWheel():
         converter = int(item)
 
         # If user lost his/her all money
-        while converter < 1:
+        if converter < 1:
             print("You lost all your money,\n"
                   "You can't play on this account anymore.\n"
                   "Please restart the program and sign in again...")
+
+            # Delete user's line from text file
+            # Read all the information and delete
+            with open("database.txt", "r") as db:
+                lines = db.readlines()
+
+            # Delete the specific line in text file
+            with open("database.txt", "w") as db:
+                for line in lines:
+                    for data in currentData["Username"]:
+                        if data not in line:
+                            db.write(line)
+
+            # Convert it to string to write it to text file
+            for balance in currentData["Money"]:
+                balance = str(balance)
+
+            # Write updated user's data to text file
+            with open("database.txt", "a") as db:
+                db.writelines(currentData["Username"])
+                db.writelines(',')
+                db.writelines(currentData["Password"])
+                db.writelines(',')
+                db.writelines(balance)
+                db.writelines('\n')
+
+            print("\n")
+            print("=-" * 25)
+            print("        Thanks for playing in Roulette G!")
+            print("-=" * 25)
+            quit()
 
         # Ask user if he/she wants to play again
         playAgain = input("Play Again       |  1\n"
@@ -176,7 +207,6 @@ def spinWheel():
             print("           Congrats! You won $", greenPrize)
             print("💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸💸")
             print("\n")
-            print(currentData["Money"])
 
             # Give back the bet amount and prize
             greenWon = int(greenPrize) + int(converter)
