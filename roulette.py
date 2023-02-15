@@ -34,8 +34,9 @@ def spinWheel():
 
     # Generate a random number with the help of random library
     winningNum = random.randint(0, 36)
-    print(winningNum)       # For testing, printing the number
-    print(currentData["Money"])
+    #print(winningNum)           # For testing, printing the number
+    for x in currentData["Money"]:
+        print("You have: $"+x)
 
     # Ask for user's bet with exception handling
     try:
