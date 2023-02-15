@@ -35,6 +35,14 @@ def userlogin():
     # Index of the Username in checkDict
     index = checkDict["Username"].index(usernameLog)
 
+    # If user doesn't have enough money to play roulette
+    for x in checkDict["Money"]:
+        converter = int(x)
+        while converter < 1:
+            print("\n   You can't play on this account anymore,\n"
+                  "Because you lost all your money, plase sign in again...")
+            exit()
+
     # Get user's existing password
     passwordLog = input("Enter your password: ").lower()
 
