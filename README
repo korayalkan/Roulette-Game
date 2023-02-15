@@ -7,6 +7,12 @@ Current user's information (while playing) is going to be in currentUser.txt
 
 -----------------------------------------------------------------------------
 
+In database.txt,
+  Datas are stored like this;
+    username,password,money
+
+-----------------------------------------------------------------------------
+
 Program is simple,
 Just sign in and program is going to redirect you to log in.
 Log in and start playing, when you win and want to exit program, your data will be updated in database.txt, but when you want to keep playing and choose "Play Again" option after playing, your data will not change. This is a bug :)
